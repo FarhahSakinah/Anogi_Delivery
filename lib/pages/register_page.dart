@@ -1,43 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:anogi_delivery/component/my_textfield.dart';
 import 'package:anogi_delivery/component/my_button.dart';
-import 'package:anogi_delivery/pages/home_page.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
 
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
-  // login method
-  void login(){
-    /*
+  final TextEditingController confirmPasswordController = TextEditingController();
 
-    fill out aunthentication here..
-
-    */
-
-    // navigate to home page after successful login
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:(context) => const HomePage(),
-        ),
-    );
-  }
   @override
   void dispose() {
     // Always dispose controllers when done
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -60,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
 
             // app slogan
             Text(
-              "Food Delivery App",
+              "Let's create an account",
               style: TextStyle(
                 fontSize: 16,
                 color: Theme.of(context).colorScheme.primary,
@@ -87,20 +72,31 @@ class _LoginPageState extends State<LoginPage> {
 
             const SizedBox(height: 25),
 
-            // sign in button
-            MyButton(
-              text: "Sign In",
-              onTap: login,
+            // confirm password field
+            MyTextfield(
+              controller: confirmPasswordController,
+              hintText: "Confirm Password",
+              obscureText: true,
             ),
 
             const SizedBox(height: 25),
 
-            // register prompt
+            // sign up button
+            MyButton(
+              text: "Sign Up",
+              onTap: () {
+                // Add your login logic here
+              },
+            ),
+
+            const SizedBox(height: 25),
+
+            // already have an account? Login here
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Not a member? ",
+                  "already have an account?",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
@@ -109,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                 GestureDetector(
                   onTap: widget.onTap,
                   child: Text(
-                    "Register now",
+                    "Login now",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontWeight: FontWeight.bold,
