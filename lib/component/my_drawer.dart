@@ -1,5 +1,6 @@
 import 'package:anogi_delivery/component/my_drawer_title.dart';
 import 'package:flutter/material.dart';
+import 'package:anogi_delivery/pages/settings_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
