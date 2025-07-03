@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fooddelivtute/models/restaurant.dart';
+import 'package:anogi_delivery/models/restaurant.dart'; 
 import 'package:provider/provider.dart';
+import 'package:anogi_delivery/component/my_cart_tile.dart'; // Make sure this import points to where MyCartTile is defined
+import 'package:anogi_delivery/component/my_button.dart'; // Make sure this import points to where MyButton is defined
 
 
 class CartPage extends StatelessWidget {

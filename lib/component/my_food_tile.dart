@@ -9,7 +9,7 @@ class MyFoodTile extends StatelessWidget {
     super.key,
     required this.food,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,52 +18,57 @@ class MyFoodTile extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
-              padding: padding, // Assuming 'padding' is defined somewhere
+              padding: const EdgeInsets.all(16.0), // Fixed padding issue
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // text food details
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(food.name),
-                        Text(
-                          '\$' + food.price.toString(),
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    food.description,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                    ),
-                  ),
-                  // food image
+                  // Food image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
                       food.imagePath,
-                      height: 120,
+                      height: 80,
+                      width: 80,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      food.description,
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      '\$${food.price.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.subtitle1,
+
+                  const SizedBox(width: 16),
+
+                  // Food details
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          food.name,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          food.description,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.inversePrimary,
+                              ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '\$${food.price.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -71,11 +76,13 @@ class MyFoodTile extends StatelessWidget {
             ),
           ),
         ),
-        // divider line
+
+        // Divider line
         Divider(
           color: Theme.of(context).colorScheme.tertiary,
-          endIndent: 25,
+          thickness: 0.8,
           indent: 25,
+          endIndent: 25,
         ),
       ],
     );

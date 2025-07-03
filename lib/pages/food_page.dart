@@ -2,6 +2,7 @@ import 'package:anogi_delivery/models/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:anogi_delivery/models/food.dart';
 import 'package:anogi_delivery/component/my_button.dart';
+import 'package:provider/provider.dart';  // ✅ Add this import
 
 class FoodPage extends StatefulWidget {
   final Food food;
@@ -24,21 +25,22 @@ class FoodPage extends StatefulWidget {
 class _FoodPageState extends State<FoodPage> {
 
   // method to add food to cart
-  void addToCart(Food food, Map<Addon, bool> selectedAddons){
-    //close the current food page to go back to menu
+  void addToCart(Food food, Map<Addon, bool> selectedAddons) {
+    // Close the current food page
     Navigator.pop(context);
 
     // format the selected addons
-    List<Addon> currentlySelectedAddons =[];
+    List<Addon> currentlySelectedAddons = [];
     for (Addon addon in widget.food.availableAddons) {
       if (widget.selectedAddons[addon] == true) {
         currentlySelectedAddons.add(addon);
       }
     }
 
-    // add to cart
-    context.read<Restaurant>().addToCart(food,currentlySelectedAddons);
+    // add to cart using Provider
+    Provider.of<Restaurant>(context, listen: false).addToCart(food, currentlySelectedAddons);  // ✅ FIXED
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +120,7 @@ class _FoodPageState extends State<FoodPage> {
                           value: widget.selectedAddons[addon],
                           onChanged: (bool? value) {
                             setState(() {
-                              widget.selectedAddons[addon] = value!;
+                              widget.selectedAddons[addon] = value ?? false;
                             });
                           },
                         );
@@ -131,7 +133,7 @@ class _FoodPageState extends State<FoodPage> {
 
             // Button → Add to Cart
             MyButton(
-              onTap: () => addToCart(widget.food,widget.selectedAddons),
+              onTap: () => addToCart(widget.food, widget.selectedAddons),
               text: "Add to cart",
             ),
 

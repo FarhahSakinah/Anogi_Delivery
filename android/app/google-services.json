@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "136279418348",
+    "project_id": "anogidelivery",
+    "storage_bucket": "anogidelivery.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136279418348:android:99129a19d3a55c58de8cc9",
+        "android_client_info": {
+          "package_name": "com.example.anogi_delivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3R5GnYrET_Zje1lrgN6jkpELM9dddtus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
