@@ -8,7 +8,7 @@ class DeliveryProgressPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title: Text("Delivery in progress.."), 
+        title: const Text("Delivery in progress.."),
         backgroundColor: Colors.transparent,
       ),
       bottomNavigationBar: _buildBottomNavBar(context),
@@ -16,11 +16,11 @@ class DeliveryProgressPage extends StatelessWidget {
         children: [
           MyReceipt(),
         ],
-        ),
+      ),
     );
   }
 
-  //Custom Bottom Nav Bar - Message / Call delivery driver
+  // Custom Bottom Nav Bar - Message / Call delivery driver
   Widget _buildBottomNavBar(BuildContext context) {
     return Container(
       height: 100,
@@ -32,79 +32,79 @@ class DeliveryProgressPage extends StatelessWidget {
         ),
       ),
       padding: const EdgeInsets.all(25),
-      child: Row (
+      child: Row(
         children: [
           // profile pic of driver
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.background,
               shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            icon: onPressed: () {},
-            icon: const Icon(Icons.person),
-          ),
-          ),
-
-          const SizedBox(width: 10)
-
-          // driver details
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start, 
-            children: [
-              Text("Christopher", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Theme.of(context).colorScheme.inversePrimary,
-                ),
-                ),
-              Text("Driver", style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                ),
-                ),
-            ],
             ),
-
-          const Spacer(),
-         
-          Row(
-            children: [
-               // message button
-               Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
-              shape: BoxShape.circle,
+            child: IconButton(
+              onPressed: () {},  // ✅ FIXED: onPressed should be here
+              icon: const Icon(Icons.person),
+            ),
           ),
-          child: IconButton(
-            icon: onPressed: () {},
-            icon: const Icon(Icons.message),
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          ),
-
 
           const SizedBox(width: 10),
 
-
-               // call button
-                Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
-              shape: BoxShape.circle,
+          // driver details
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Christopher",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
+              Text(
+                "Driver",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
           ),
-          child: IconButton(
-            icon: onPressed: () {},
-            icon: const Icon(Icons.call),
-            color: Colors.green,
-          ),
-          ),
 
-            ]
-          )
+          const Spacer(),
 
+          // message & call buttons
+          Row(
+            children: [
+              // message button
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  onPressed: () {},  // ✅ FIXED
+                  icon: const Icon(Icons.message),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+
+              const SizedBox(width: 10),
+
+              // call button
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  onPressed: () {},  // ✅ FIXED
+                  icon: const Icon(Icons.call),
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
         ],
-      )
+      ),
     );
   }
 }
-
