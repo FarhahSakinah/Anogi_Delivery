@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:anogi_delivery/pages/cart_page.dart'; // ✅ Make sure this import points to your actual CartPage file
 
 class MySilverAppBar extends StatelessWidget {
   final Widget child;
   final Widget title;
 
-  const MySilverAppBar({super.key, required this.child, required this.title});
+  const MySilverAppBar({
+    super.key,
+    required this.child,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +19,21 @@ class MySilverAppBar extends StatelessWidget {
       floating: false,
       pinned: true,
       actions: [
-        IconButton(onPressed: (){
-          Navigator.push(
-            context, 
-            MaterialPageRoute (
-              builder: (context) => const CartPage(),
-          ),
-          );
-        }, 
-        icon: const Icon(Icons.shopping_cart_outlined)
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CartPage(), // ✅ CartPage must be imported
+              ),
+            );
+          },
+          icon: const Icon(Icons.shopping_cart_outlined),
         ),
       ],
       backgroundColor: Theme.of(context).colorScheme.background,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title:const Text("Anogi Delivery"),
+      title: const Text("Anogi Delivery"),
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.only(bottom: 50.0),

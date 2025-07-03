@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:anogi_delivery/component/my_textfield.dart';
 import 'package:anogi_delivery/component/my_button.dart';
-import 'package:anogi_delivery/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
-  final void Function()? onTap;
+  final VoidCallback onTap;
 
   const LoginPage({super.key, required this.onTap});
 
@@ -13,29 +12,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Text editing controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
-  // login method
-  void login(){
-    /*
 
-    fill out aunthentication here..
+  void login() {
+    // TODO: Implement Firebase login here
+    // Example:
+    // await FirebaseAuth.instance.signInWithEmailAndPassword(
+    //   email: emailController.text,
+    //   password: passwordController.text,
+    // );
 
-    */
-
-    // navigate to home page after successful login
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:(context) => const HomePage(),
-        ),
-    );
+    // No need to navigate manually. AuthGate will automatically switch on login.
   }
+
   @override
   void dispose() {
-    // Always dispose controllers when done
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -46,79 +38,76 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // logo
-            Icon(
-              Icons.lock_open_rounded,
-              size: 100,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-
-            const SizedBox(height: 20),
-
-            // app slogan
-            Text(
-              "Food Delivery App",
-              style: TextStyle(
-                fontSize: 16,
-                color: Theme.of(context).colorScheme.primary,
+        child: SingleChildScrollView(  // ✅ Added to avoid overflow on smaller screens
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.lock_open_rounded,
+                size: 100,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
-            ),
 
-            const SizedBox(height: 25),
+              const SizedBox(height: 20),
 
-            // email field
-            MyTextfield(
-              controller: emailController,
-              hintText: "Email",
-              obscureText: false,
-            ),
-
-            const SizedBox(height: 10),
-
-            // password field
-            MyTextfield(
-              controller: passwordController,
-              hintText: "Password",
-              obscureText: true,
-            ),
-
-            const SizedBox(height: 25),
-
-            // sign in button
-            MyButton(
-              text: "Sign In",
-              onTap: login,
-            ),
-
-            const SizedBox(height: 25),
-
-            // register prompt
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Not a member? ",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                  ),
+              Text(
+                "Food Delivery App",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-                const SizedBox(width: 4),
-                GestureDetector(
-                  onTap: widget.onTap,
-                  child: Text(
-                    "Register now",
+              ),
+
+              const SizedBox(height: 25),
+
+              MyTextfield(
+                controller: emailController,
+                hintText: "Email",
+                obscureText: false,
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextfield(
+                controller: passwordController,
+                hintText: "Password",
+                obscureText: true,
+              ),
+
+              const SizedBox(height: 25),
+
+              MyButton(
+                text: "Sign In",
+                onTap: login,
+              ),
+
+              const SizedBox(height: 25),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Not a member? ",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(width: 4),
+                  GestureDetector(
+                    onTap: widget.onTap,   // ✅ Fixed: call passed function
+                    child: Text(
+                      "Register now",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
