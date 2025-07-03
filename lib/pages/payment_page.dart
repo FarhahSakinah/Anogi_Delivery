@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:anogi_delivery/component/my_button.dart';
+
+import 'delivery_progress_page.dart';
 // Make sure to import or define DeliveryProgressPage
 // import 'package:anogi_delivery/pages/delivery_progress_page.dart';
 
@@ -47,12 +49,11 @@ class _PaymentPageState extends State<PaymentPage> {
             // yes button
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // close dialog first
+                Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => DeliveryProgressPage(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const DeliveryProgressPage()
+                ),
                 );
               },
               child: const Text("Yes"),

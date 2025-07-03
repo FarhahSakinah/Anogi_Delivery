@@ -14,8 +14,15 @@ class MySilverAppBar extends StatelessWidget {
       floating: false,
       pinned: true,
       actions: [
-        IconButton(onPressed: (){}, 
-        icon:const Icon(Icons.shopping_cart)
+        IconButton(onPressed: (){
+          Navigator.push(
+            context, 
+            MaterialPageRoute (
+              builder: (context) => const CartPage(),
+          ),
+          );
+        }, 
+        icon: const Icon(Icons.shopping_cart_outlined)
         ),
       ],
       backgroundColor: Theme.of(context).colorScheme.background,
