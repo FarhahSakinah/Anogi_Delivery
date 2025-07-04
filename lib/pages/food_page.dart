@@ -38,7 +38,7 @@ class _FoodPageState extends State<FoodPage> {
     }
 
     // add to cart using Provider
-    Provider.of<Restaurant>(context, listen: false).addToCart(food, currentlySelectedAddons);  // ✅ FIXED
+    Provider.of<Restaurant>(context, listen: false).addToCart(food, currentlySelectedAddons, 1);  // Pass quantity as the third argument
   }
 
   @override

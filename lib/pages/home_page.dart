@@ -87,10 +87,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             )),
         ],
 
-        body: Consumer<Restaurant>(builder:(context, restaurant, child) => TabBarView(
-          controller: _tabController,
-          children: getFoodInThisCategory(restaurant.menu),
-        ),
+        body: Consumer<Restaurant>(builder:(context, restaurant, child) {
+
+          return TabBarView(
+            controller: _tabController,
+            children: getFoodInThisCategory(restaurant.menu),
+          );
+        },
         ),
       ),
     );

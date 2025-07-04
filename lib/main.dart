@@ -13,7 +13,7 @@ void main() async {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => Restaurant()), 
+      ChangeNotifierProvider(create: (_) => Restaurant()), 
       // restaurant provider
       // ChangeNotifierProvider(create: (context) => Restaurant()),
     ],
