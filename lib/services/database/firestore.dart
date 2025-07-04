@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreService {
-  //get collection of orders
-  final CollectionReference orders = 
-    FirebaseFirestore.instance.collection('orders');
+  final CollectionReference orders = FirebaseFirestore.instance.collection('Orders');
 
-  //save order to db
-  Future<void> saveOrderToDatabase(String receipt) async{
-    await orders.add({
-      'date': DateTime.now(),
-      'order': receipt,
-      //add more fields as necessary..
-    });
+  Future<void> saveOrderToDatabase(String receipt) async {
+    try {
+      await orders.add({
+        'receipt': receipt,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('Error saving order: $e');
+    }
   }
 }

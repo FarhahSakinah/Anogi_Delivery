@@ -1,29 +1,49 @@
+import 'package:anogi_delivery/models/restaurant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MyCurrentLocation extends StatelessWidget {
+class MyCurrentLocation extends StatefulWidget {
   const MyCurrentLocation({super.key});
 
-  void openLocationSearhBox(BuildContext context) {
+  @override
+  State<MyCurrentLocation> createState() => _MyCurrentLocationState();
+}
+
+class _MyCurrentLocationState extends State<MyCurrentLocation> {
+  final TextEditingController textController = TextEditingController();
+
+  void openLocationSearchBox(BuildContext context) {
     showDialog(
-      context: context, 
+      context: context,
       builder: (context) => AlertDialog(
         title: const Text("Your Location"),
-        content: const TextField(
-          decoration: InputDecoration(hintText: "Search for your location.."),
+        content: TextField(
+          controller: textController,
+          decoration: const InputDecoration(hintText: "Search for your location.."),
+        ),
+        actions: [
+          // Cancel button
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              textController.clear();
+            },
+            child: const Text("Cancel"),
           ),
-          actions: [
-            //cancel button
-            MaterialButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Cancel"),
-              ),
 
-            //save button
-            MaterialButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Save"),
-              ),
-          ],
+          // Save button
+          TextButton(
+            onPressed: () {
+              String newAddress = textController.text.trim();
+              if (newAddress.isNotEmpty) {
+                context.read<Restaurant>().updateDeliveryAddress(newAddress);
+              }
+              Navigator.pop(context);
+              textController.clear();
+            },
+            child: const Text("Save"),
+          ),
+        ],
       ),
     );
   }
@@ -35,21 +55,27 @@ class MyCurrentLocation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Deliver now", style: TextStyle(color: Theme.of(context).colorScheme.primary),),
+          Text(
+            "Deliver now",
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ),
           GestureDetector(
-            onTap: () => openLocationSearhBox(context),
+            onTap: () => openLocationSearchBox(context),
             child: Row(
               children: [
-                //address
-                Text("Tanjong Malim UPSI",
-                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                  fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Consumer<Restaurant>(
+                    builder: (context, restaurant, child) => Text(
+                      restaurant.deliveryAddress,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
-                  
-                //dropdown menu
-                Icon(Icons.arrow_drop_down_rounded),
+                const Icon(Icons.arrow_drop_down_rounded),
               ],
             ),
           ),
