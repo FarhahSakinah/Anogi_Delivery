@@ -1,99 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:anogi_delivery/models/restaurant.dart'; 
 import 'package:provider/provider.dart';
-import 'package:anogi_delivery/component/my_cart_tile.dart'; // Make sure this import points to where MyCartTile is defined
-import 'package:anogi_delivery/component/my_button.dart'; // Make sure this import points to where MyButton is defined
-
+import 'package:anogi_delivery/component/my_cart_tile.dart'; 
+import 'package:anogi_delivery/component/my_button.dart'; 
+import 'package:anogi_delivery/pages/payment_page.dart'; // ✅ Make sure this import is correct
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
-Widget build(BuildContext context) {
-  return Consumer<Restaurant>(
-    builder: (context, restaurant, child) {
-      // cart
-      final userCart = restaurant.cart;
+  Widget build(BuildContext context) {
+    return Consumer<Restaurant>(
+      builder: (context, restaurant, child) {
+        // Access the user's cart
+        final userCart = restaurant.cart;
 
-      // scaffold UI
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text("Cart"),
-          backgroundColor: Colors.transparent,
-          foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-          actions: [
-            //clear cart button
-            IconButton(
-              onPressed: () {
-                showDialog(
-                context: context, 
-                builder: (context) => AlertDialog(
-                title: const Text(
-                  "Are you sure you want to clear the cart?"),
-                actions: [
-                  // cancel button
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                      child: const Text ("Cancel"),
-                  ),
-
-                  //yes button
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      restaurant.clearCart();
-                    },
-                    child: const Text ("Yes"),
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Cart"),
+            backgroundColor: Colors.transparent,
+            foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+            actions: [
+              // Clear Cart Button
+              IconButton(
+                onPressed: () {
+                  if (userCart.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Cart is already empty.")),
+                    );
+                    return;
+                  }
+                  showDialog(
+                    context: context, 
+                    builder: (context) => AlertDialog(
+                      title: const Text("Are you sure you want to clear the cart?"),
+                      actions: [
+                        // Cancel Button
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Cancel"),
+                        ),
+                        // Yes Button
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            restaurant.clearCart();
+                          },
+                          child: const Text("Yes"),
+                        ),
+                      ],
                     ),
-                ],
-                ),
-                );
-              },
-              icon: const Icon(Icons.delete),
-              )
-          ],
-        ),
-        body: Column(
-          children: [
-
-            // list of cart
-            Expanded (
-              child: Column(
-                children: [
-                  userCart.isEmpty 
-                  ? const Expanded (
-                    child: Center(
-                      child: const Text("Cart is empty.."),
-                      ),
-                      ) 
-                      :Expanded(
-                    child: ListView.builder(
-                      itemCount: userCart.length,
-                      itemBuilder: (context, index) {
-                        // get individual cart item
-                        final cartItem = userCart[index];
-              
-                        // return cart tile UI
-                        return MyCartTile(
-                          cartItem: cartItem
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                  );
+                },
+                icon: const Icon(Icons.delete),
               ),
-            ),
+            ],
+          ),
 
-            //button to pay 
-            MyButton(onTap: () {
+          body: Column(
+            children: [
+              // Cart Items or Empty Message
+              Expanded(
+                child: userCart.isEmpty
+                    ? const Center(
+                        child: Text("Cart is empty.."),
+                      )
+                    : ListView.builder(
+                        itemCount: userCart.length,
+                        itemBuilder: (context, index) {
+                          final cartItem = userCart[index];
+                          return MyCartTile(cartItem: cartItem);
+                        },
+                      ),
+              ),
 
-            }, text: "Go to checkout"),
+              // Go to Checkout Button
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: MyButton(
+                  onTap: () {
+                    if (userCart.isNotEmpty) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PaymentPage(),  // ✅ Payment first
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Your cart is empty!")),
+                      );
+                    }
+                  },
+                  text: "Go to Checkout",
+                ),
+              ),
 
-            const SizedBox(height: 25),
-          ],
-        ),
-      );
-    },
-  );
-}
+              const SizedBox(height: 25),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ],
 
         body: Consumer<Restaurant>(builder:(context, restaurant, child) {
-
+            print("✅ Menu length: ${restaurant.menu.length}");
           return TabBarView(
             controller: _tabController,
             children: getFoodInThisCategory(restaurant.menu),
