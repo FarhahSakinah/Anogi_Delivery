@@ -125,7 +125,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'French Fries',
       description: 'Crispy golden fries with a side of ketchup',
-      imagePath: 'lib/images/sides/21.jpg',
+      imagePath: 'lib/images/sides/21.png',
       price: 2.99,
       category: FoodCategory.sides,
       availableAddons: [
@@ -136,7 +136,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Onion Rings',
       description: 'Crispy battered onion rings with ranch dipping sauce',
-      imagePath: 'lib/images/sides/22.jpg',
+      imagePath: 'lib/images/sides/22.png',
       price: 3.49,
       category: FoodCategory.sides,
       availableAddons: [
@@ -147,7 +147,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Mozzarella Sticks',
       description: 'Fried mozzarella sticks with marinara sauce',
-      imagePath: 'lib/images/sides/23.jpg',
+      imagePath: 'lib/images/sides/23.png',
       price: 4.49,
       category: FoodCategory.sides,
       availableAddons: [
@@ -160,7 +160,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Chocolate Lava Cake',
       description: 'Warm chocolate cake with a gooey molten center',
-      imagePath: 'lib/images/desserts/6.jpg',
+      imagePath: 'lib/images/desserts/6.png',
       price: 5.99,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -171,7 +171,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Cheesecake',
       description: 'Creamy cheesecake with a graham cracker crust',
-      imagePath: 'lib/images/desserts/7.jpg',
+      imagePath: 'lib/images/desserts/7.png',
       price: 4.99,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -182,7 +182,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Apple Pie',
       description: 'Classic apple pie with a flaky crust and cinnamon',
-      imagePath: 'lib/images/desserts/8.jpg',
+      imagePath: 'lib/images/desserts/8.png',
       price: 3.99,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -193,7 +193,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Brownie Sundae',
       description: 'Warm brownie topped with ice cream and chocolate sauce',
-      imagePath: 'lib/images/desserts/9.jpg',
+      imagePath: 'lib/images/desserts/9.png',
       price: 6.49,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -204,7 +204,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Tiramisu',
       description: 'Classic Italian dessert with coffee-soaked ladyfingers and mascarpone cheese',
-      imagePath: 'lib/images/desserts/10.jpg',
+      imagePath: 'lib/images/desserts/10.png',
       price: 5.49,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -217,7 +217,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Coca-Cola',
       description: 'Classic Coca-Cola soft drink',
-      imagePath: 'lib/images/drinks/20.jpg',
+      imagePath: 'lib/images/drinks/20.png',
       price: 1.99,
       category: FoodCategory.drinks,
       availableAddons: [
@@ -228,7 +228,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Iced Tea',
       description: 'Refreshing iced tea with lemon',
-      imagePath: 'lib/images/drinks/21.jpg',
+      imagePath: 'lib/images/drinks/21.png',
       price: 2.49,
       category: FoodCategory.drinks,
       availableAddons: [
@@ -239,7 +239,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Lemonade',
       description: 'Freshly squeezed lemonade',
-      imagePath: 'lib/images/drinks/22.jpg',
+      imagePath: 'lib/images/drinks/22.png',
       price: 2.99,
       category: FoodCategory.drinks,
       availableAddons: [
@@ -250,7 +250,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Coffee',
       description: 'Freshly brewed coffee',
-      imagePath: 'lib/images/drinks/23.jpg',
+      imagePath: 'lib/images/drinks/23.png',
       price: 1.99,
       category: FoodCategory.drinks,
       availableAddons: [
@@ -261,7 +261,7 @@ class Restaurant extends ChangeNotifier {
     Food(
       name: 'Milkshake',
       description: 'Creamy milkshake with your choice of flavor',
-      imagePath: 'lib/images/drinks/24.jpg',
+      imagePath: 'lib/images/drinks/24.png',
       price: 3.99,
       category: FoodCategory.drinks,
       availableAddons: [
